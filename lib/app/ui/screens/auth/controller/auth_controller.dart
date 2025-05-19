@@ -85,6 +85,7 @@ class AuthController extends GetxController {
   void submitLogin() {
     // Simula envío de código
     Get.to(() => OtpScreen());
+    _startTimer();
   }
 
   void verifyOtp(String code) {

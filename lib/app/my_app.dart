@@ -25,8 +25,11 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           useMaterial3: true,
           textTheme: GoogleFonts.interTextTheme(),
+          scaffoldBackgroundColor: AppColors.secondary,
           appBarTheme: AppBarTheme(
             iconTheme: IconThemeData(color: AppColors.primary),
+            backgroundColor: AppColors.secondary,
+            elevation: 0,
           ),
         ),
       ),
