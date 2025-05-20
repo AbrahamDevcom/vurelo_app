@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:vurelo/app/ui/global_controller/global_controller.dart';
 import 'package:vurelo/app/ui/screens/auth/otp_screen.dart';
 
@@ -9,25 +10,26 @@ import '../../../../domain/enums/auth_method.dart';
 import '../../../../domain/models/country_model.dart';
 import '../../../global_widgets/country_selector.dart';
 import '../../../global_widgets/terms_acceptance.dart';
+import '../../../routes/app_pages.dart';
 import '../../../theme/app_colors.dart';
 
 class AuthController extends GetxController {
   final GlobalController globalController = GlobalController();
   final otpController = TextEditingController();
+  final TextEditingController passwordOtpController = TextEditingController();
+  final StreamController<ErrorAnimationType> errorController =
+      StreamController<ErrorAnimationType>();
+  RxBool hasError = false.obs;
   final RxInt secondsLeft = 30.obs;
   var authMethod = AuthMethod.phone.obs;
   Timer? _timer;
   var phone = ''.obs;
   var email = ''.obs;
   var otp = ''.obs;
-
   final RxBool termsAccepted = false.obs;
   final RxBool privacyAccepted = false.obs;
-
-  // Check if both conditions are accepted
   bool get canContinue => termsAccepted.value && privacyAccepted.value;
-
-  // Toggle methods
+  String correctPassword = "123456";
 
   final Rx<Country> selectedCountry = Country(
     name: 'Colombia',
@@ -35,7 +37,6 @@ class AuthController extends GetxController {
     flag: 'assets/co.png',
   ).obs;
 
-  // Method to update selected country
   void updateSelectedCountry(Country country) {
     selectedCountry.value = country;
   }
@@ -61,7 +62,6 @@ class AuthController extends GetxController {
     );
 
     if (result == true) {
-      // Both checkboxes were accepted and the continue button was pressed
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Términos aceptados correctamente')),
       );
@@ -83,19 +83,28 @@ class AuthController extends GetxController {
   }
 
   void submitLogin() {
-    // Simula envío de código
     Get.to(() => OtpScreen());
     _startTimer();
   }
 
   void verifyOtp(String code) {
     otp.value = code;
-    // Validar OTP real aquí
-    print("Código ingresado: $code");
+    Get.toNamed("${Routes.launch}${Routes.passwordotp}");
+  }
+
+  void verifyPasswordOtp(String code) {
+    if (code != correctPassword) {
+      errorController.add(ErrorAnimationType.shake);
+      hasError.value = true;
+    } else {
+      hasError.value = false;
+      print("Código correcto");
+    }
+    otp.value = code;
+    Get.toNamed("${Routes.launch}${Routes.passwordotp}");
   }
 
   void resendCode() {
-    // Reenvías el código (API / servicio OTP)...
     _startTimer();
   }
 

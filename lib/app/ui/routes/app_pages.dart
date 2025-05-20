@@ -1,6 +1,4 @@
 import 'package:get/get.dart';
-import 'package:vurelo/app/ui/screens/auth/launch_screen.dart';
-import 'package:vurelo/app/ui/screens/auth/otp_screen.dart';
 
 import 'barrel_routes.dart';
 
@@ -28,6 +26,10 @@ class AppPages {
         GetPage(
           name: Routes.otp,
           page: () => OtpScreen(),
+        ),
+        GetPage(
+          name: Routes.passwordotp,
+          page: () => PasswordOtpScreen(),
         ),
         GetPage(
           name: Routes.password,

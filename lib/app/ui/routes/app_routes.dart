@@ -4,6 +4,7 @@ abstract class Routes {
   static const splash = '/';
   static const launch = '/launch';
   static const otp = '/otp';
+  static const passwordotp = '/passwordotp';
   static const password = '/password';
   static const login = '/login';
   static const register = '/register';

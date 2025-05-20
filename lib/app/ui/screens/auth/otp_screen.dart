@@ -7,6 +7,8 @@ import '../../theme/app_colors.dart';
 import 'controller/auth_controller.dart';
 
 class OtpScreen extends GetView<AuthController> {
+  const OtpScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -113,9 +115,10 @@ class OtpScreen extends GetView<AuthController> {
                         child: const Text(
                           "Reenviar código",
                           style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: AppColors.primary),
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: AppColors.primary,
+                          ),
                         ),
                       ),
               ),

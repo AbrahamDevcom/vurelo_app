@@ -3,6 +3,9 @@ export '../screens/auth/login_screen.dart';
 export '../screens/onboarding/onboarding_screen.dart';
 export '../screens/auth/registration_screen.dart';
 export '../screens/splash/splash_screen.dart';
+export '../screens/auth/launch_screen.dart';
+export '../screens/auth/otp_screen.dart';
+export '../screens/auth/password_screen.dart';
 //Bindings
 export '../screens/auth/binding/auth_binding.dart';
 export '../screens/onboarding/binding/onboarding_binding.dart';
